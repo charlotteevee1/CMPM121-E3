@@ -1,11 +1,16 @@
 const portrait = document.querySelector<HTMLDivElement>("#portrait")!;
 const spin = document.querySelector<HTMLButtonElement>("#spin")!;
 
+// @deno-types="./asset-url.d.ts"
+import hatUrl from "./assets/hat.png?no-inline";
+// @deno-types="./asset-url.d.ts"
+import monocleUrl from "./assets/monocle.png?no-inline";
+
 // The prototype grew inline. Keep it this way until the refactoring checkpoint.
 const face = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 face.setAttribute("viewBox", "0 0 200 200");
 face.setAttribute("role", "img");
-face.setAttribute("aria-label", "A neutral face");
+face.setAttribute("aria-label", "A fancy face with a top hat and monocle");
 
 const head = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
 head.setAttribute("cx", "100");
@@ -58,6 +63,33 @@ mouth.setAttribute("stroke", "#302c29");
 mouth.setAttribute("stroke-width", "4");
 mouth.setAttribute("stroke-linecap", "round");
 face.append(mouth);
+
+// File name: hat.png
+// Source URL: https://freesvg.org/top-hat
+// Creator: OpenClipart
+//License or permission: Public Domain
+const hatImg = document.createElementNS("http://www.w3.org/2000/svg", "image");
+hatImg.setAttribute("href", hatUrl);
+hatImg.setAttribute("x", "50");
+hatImg.setAttribute("y", "-2");
+hatImg.setAttribute("width", "50");
+hatImg.setAttribute("height", "50");
+face.append(hatImg);
+
+// File name: monocle.png
+// Source URL: https://www.clipsafari.com/clips/o172605-a-monocle
+// Creator: Merlin2525
+// License or permission: CC0
+const monocleImg = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "image",
+);
+monocleImg.setAttribute("href", monocleUrl);
+monocleImg.setAttribute("x", "85");
+monocleImg.setAttribute("y", "67");
+monocleImg.setAttribute("width", "100");
+monocleImg.setAttribute("height", "100");
+face.append(monocleImg);
 
 portrait.append(face);
 
