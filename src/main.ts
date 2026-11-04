@@ -6,8 +6,10 @@ function buildFace() {
   const face = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   face.setAttribute("viewBox", "0 0 200 200");
   face.setAttribute("role", "img");
-  face.setAttribute("aria-label", "A neutral face");
-
+  face.setAttribute(
+    "aria-label",
+    "A sickly face",
+  );
   const head = document.createElementNS(
     "http://www.w3.org/2000/svg",
     "ellipse",
@@ -20,6 +22,52 @@ function buildFace() {
   head.setAttribute("stroke", "#302c29");
   head.setAttribute("stroke-width", "4");
   face.append(head);
+
+  const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+  face.append(defs);
+
+  const gradient = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "linearGradient",
+  );
+  gradient.setAttribute("id", "cheek-shade");
+  gradient.setAttribute("x1", "0%");
+  gradient.setAttribute("y1", "0%");
+  gradient.setAttribute("x2", "100%");
+  gradient.setAttribute("y2", "0%");
+  defs.append(gradient);
+
+  const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+  stop1.setAttribute("offset", "0%");
+  stop1.setAttribute("stop-color", "#edaf82f3");
+  gradient.append(stop1);
+
+  const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+  stop2.setAttribute("offset", "100%");
+  stop2.setAttribute("stop-color", "#8eb216");
+  gradient.append(stop2);
+
+  const ellipse = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "ellipse",
+  );
+  ellipse.setAttribute("cx", "100");
+  ellipse.setAttribute("cy", "100");
+  ellipse.setAttribute("rx", "84");
+  ellipse.setAttribute("ry", "76");
+  ellipse.setAttribute("transform", "rotate(-90, 100, 100)");
+  ellipse.setAttribute("fill", "url(#cheek-shade)");
+  face.append(ellipse);
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute(
+    "d",
+    "M 60 140 Q 70 130 80 140 Q 100 160 110 140 Q 120 120 140 140",
+  );
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", "#302c29");
+  path.setAttribute("stroke-width", "4");
+  face.append(path);
 
   const leftEye = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -52,16 +100,6 @@ function buildFace() {
   nose.setAttribute("stroke-width", "4");
   nose.setAttribute("stroke-linecap", "round");
   face.append(nose);
-
-  const mouth = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  mouth.setAttribute("x1", "75");
-  mouth.setAttribute("y1", "137");
-  mouth.setAttribute("x2", "125");
-  mouth.setAttribute("y2", "137");
-  mouth.setAttribute("stroke", "#302c29");
-  mouth.setAttribute("stroke-width", "4");
-  mouth.setAttribute("stroke-linecap", "round");
-  face.append(mouth);
 
   return face;
 }
